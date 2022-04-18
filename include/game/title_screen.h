@@ -2,11 +2,12 @@
 #define TITLE_SCREEN_H
 
 #include "globals.h"
-#include "ui_title_screen.h"
 
 #include <QMainWindow>
 
 #include <memory>
+
+namespace Ui { class TitleScreen; }
 
 /// @brief Responsible for the graphics of the title screen.
 /// @details It is main functionality is to gather game options set by the user,
@@ -18,7 +19,7 @@ private:
 
 public:
     /// @brief Reference to the UI object of the game.
-    std::unique_ptr<Ui::TitleScreen> ui_;
+    Ui::TitleScreen* ui_;
 
     /// @brief Values and flags that control a game.
     Options options_{};
@@ -26,6 +27,7 @@ public:
     /// @brief Constructs the game of the title screen.
     /// @param parent QWidget type parent that owns this instance of the controller.
     explicit TitleScreen(QWidget* parent = nullptr);
+    virtual ~TitleScreen();
 
 private:
     /// @brief Sets connections to gather game options from the graphical elements.

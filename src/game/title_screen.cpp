@@ -1,20 +1,26 @@
 #include "title_screen.h"
 #include "controller.h"
+#include "./ui_title_screen.h"
 
 TitleScreen::TitleScreen(QWidget* parent) : QMainWindow{parent}, ui_{new Ui::TitleScreen}
 {
     ui_->setupUi(this);
-    setConnections();
+    connect(ui_->BoardSize,    SIGNAL(valueChanged(int)), this, SLOT(updateBoardSize(int)));
+    connect(ui_->onePlayer,    SIGNAL(toggled(bool)),     this, SLOT(updateSinglePlayer(bool)));
+    connect(ui_->twoPlayers,   SIGNAL(toggled(bool)),     this, SLOT(updateTwoPlayers(bool)));
+    connect(ui_->AIStarts,     SIGNAL(toggled(bool)),     this, SLOT(updateAIStartsGame(bool)));
+    connect(ui_->MiniMaxDepth, SIGNAL(valueChanged(int)), this, SLOT(updateMiniMaxDepth(int)));
+    connect(ui_->startGame,    SIGNAL(clicked()),         this, SLOT(startGame()));
+}
+
+TitleScreen::~TitleScreen()
+{
+    delete ui_;
 }
 
 void TitleScreen::setConnections()
 {
-    connect(ui_->BoardSize,    SIGNAL(valueChanged(int)), SLOT(updateBoardSize(int)));
-    connect(ui_->onePlayer,    SIGNAL(toggled(bool)),     SLOT(updateSinglePlayer(bool)));
-    connect(ui_->twoPlayers,   SIGNAL(toggled(bool)),     SLOT(updateTwoPlayers(bool)));
-    connect(ui_->AIStarts,     SIGNAL(toggled(bool)),     SLOT(updateAIStartsGame(bool)));
-    connect(ui_->MiniMaxDepth, SIGNAL(valueChanged(int)), SLOT(updateMiniMaxDepth(int)));
-    connect(ui_->startGame,    SIGNAL(clicked()),         SLOT(startGame()));
+
 }
 
 void TitleScreen::updateBoardSize(int size)

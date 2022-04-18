@@ -2,12 +2,13 @@
 #define GAME_H
 
 #include "globals.h"
-#include "ui_game.h"
 
 #include <QDialog>
 
 #include <memory>
 #include <vector>
+
+namespace Ui { class Game; }
 
 /// @brief Responsible for the graphics of the game.
 /// @details It is responsible for building the cells of a board, which can be of variable size,
@@ -19,12 +20,14 @@ private:
     Q_OBJECT
 
     /// @brief Reference to the graphical object of the game.
-    std::unique_ptr<Ui::Game> ui_;
+    Ui::Game* ui_;
 
 public:
     /// @brief Constructs a game of a game.
     /// @param parent QWidget type parent that owns this instance of the controller.
     explicit Game(QWidget* parent = nullptr);
+
+    virtual ~Game();
 
     /// @brief Sets the text of the cell to the current player's mark.
     /// @param cell Reference to the clicked cell.

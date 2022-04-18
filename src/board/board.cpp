@@ -14,12 +14,10 @@ Board& Board::operator=(Board value)
 bool Board::setPlayerInput(std::size_t row, std::size_t column, Mark player)
 {
     // The game is over, so no input is allowed until game resets.
-    if (evaluateBoard() != State::NoWinner)
-        return false;
+    if (evaluateBoard() != State::NoWinner) return false;
 
     // Cell is not empty.
-    if (board[row][column] != Mark::Empty)
-        return false;
+    if (board[row][column] != Mark::Empty) return false;
 
     // Update cell with current player's mark.
     board[row][column] = player;
